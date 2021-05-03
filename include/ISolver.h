@@ -5,7 +5,7 @@
 
 class ISolver {
 public:
-    virtual int* solve(bool* mask, int w, int h) = 0;
+    virtual int* solve(IEvaluator* eval, bool* mask, int w, int h) = 0;
 };
 
 #endif //__ISOLVER_H__

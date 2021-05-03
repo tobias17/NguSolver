@@ -7,7 +7,7 @@ using namespace std;
 
 int main() {
     IEvaluator* eval = new VanillaEvaluator();
-    ISolver* solver = new RandomSolver(eval, 1000, 500);
+    ISolver* solver = new RandomSolver(1000, 500);
 
     int w = 20;
     int h = 17;
@@ -32,7 +32,7 @@ int main() {
         0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
     };
 
-    int* bestBoard = solver->solve(mask, w, h);
+    int* bestBoard = solver->solve(eval, mask, w, h);
 
     cout << "Best Board:" << endl;
     for (int y = 0; y < h; y++) {

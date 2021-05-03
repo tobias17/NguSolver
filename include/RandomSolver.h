@@ -5,10 +5,9 @@
 
 class RandomSolver : public ISolver {
 public:
-    RandomSolver(IEvaluator* _eval, int _iters, int seed);
-    int* solve(bool* mask, int w, int h);
+    RandomSolver(int _iters, int seed);
+    int* solve(IEvaluator* eval, bool* mask, int w, int h);
 private:
-    IEvaluator* eval;
     int iters;
 };
 

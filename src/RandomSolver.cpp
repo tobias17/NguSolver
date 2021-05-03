@@ -2,13 +2,12 @@
 
 #include "RandomSolver.h"
 
-RandomSolver::RandomSolver(IEvaluator* _eval, int _iters, int seed) {
-    eval = _eval;
+RandomSolver::RandomSolver(int _iters, int seed) {
     iters = _iters;
     srand(seed);
 }
 
-int* RandomSolver::solve(bool* mask, int w, int h) {
+int* RandomSolver::solve(IEvaluator* eval, bool* mask, int w, int h) {
     int** boards = new int*[iters];
     int length = w*h;
 
