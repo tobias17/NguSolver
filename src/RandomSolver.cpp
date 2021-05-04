@@ -1,23 +1,26 @@
 #include <cstdlib>
 
 #include "RandomSolver.h"
+#include "Board.h"
 
 RandomSolver::RandomSolver(int _iters, int seed) {
     iters = _iters;
     srand(seed);
 }
 
-int* RandomSolver::solve(IEvaluator* eval, bool* mask, int w, int h) {
-    int** boards = new int*[iters];
+Board RandomSolver::solve(IEvaluator* eval, bool* mask, int w, int h) {
+    Board* boards = new Board[iters];
     int length = w*h;
 
     for (int iter = 0; iter < iters; iter++) {
-        boards[iter] = new int[length];
+        boards[iter].units = new int[length];
+        boards[iter].rots = new int[length];
         for (int index = 0; index < length; index++) {
             if (mask[index]) {
-                boards[iter][index] = rand() % (eval->getBuildingCount()-1) + 1; // 1 upto buildingCount
+                boards[iter].units[index] = rand() % (eval->getUnitCount()-1) + 1;; // 1 upto buildingCount
+                boards[iter].rots[index] = rand() % 4;
             } else {
-                boards[iter][index] = 0;
+                boards[iter].units[index] = 0;
             }
         }
     }
@@ -25,16 +28,21 @@ int* RandomSolver::solve(IEvaluator* eval, bool* mask, int w, int h) {
     double* evals = eval->batchEvaluate(boards, w, h, iters);
 
     double bestEval = 0;
-    int* bestBoard = nullptr;
+    Board bestBoard = {
+        .units = nullptr,
+        .rots = nullptr,
+    };
     for (int i = 0; i < iters; i++) {
         if (evals[i] > bestEval) {
-            if (bestBoard != nullptr) {
-                delete[] bestBoard;
+            if (bestBoard.units != nullptr) {
+                delete[] bestBoard.units;
+                delete[] bestBoard.rots;
             }
             bestEval = evals[i];
             bestBoard = boards[i];
         } else {
-            delete[] boards[i];
+            delete[] boards[i].units;
+            delete[] boards[i].rots;
         }
     }
     delete[] boards;

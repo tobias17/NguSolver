@@ -3,13 +3,15 @@
 
 #include <string>
 
+#include "Board.h"
+
 class IEvaluator {
 public:
     enum class Buildings;
-    virtual double* batchEvaluate(int** board, int w, int h, int k) = 0;
-    virtual double evaluate(int* board, int w, int h) = 0;
-    virtual int getBuildingCount() = 0;
-    virtual std::string buildingToString(int building) = 0;
+    virtual double* batchEvaluate(Board* board, int w, int h, int k) = 0;
+    virtual double evaluate(Board board, int w, int h) = 0;
+    virtual int getUnitCount() = 0;
+    virtual std::string unitToString(int unit, int rot) = 0;
 };
 
 #endif //__IEVALUATOR_H__

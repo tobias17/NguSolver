@@ -6,7 +6,7 @@
 class RandomSolver : public ISolver {
 public:
     RandomSolver(int _iters, int seed);
-    int* solve(IEvaluator* eval, bool* mask, int w, int h);
+    Board solve(IEvaluator* eval, bool* mask, int w, int h);
 private:
     int iters;
 };

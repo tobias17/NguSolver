@@ -10,18 +10,25 @@ private:
 public:
     VanillaEvaluator();
     ~VanillaEvaluator();
-    double* batchEvaluate(int** board, int w, int h, int k);
-    double evaluate(int* board, int w, int h);
-    enum class Buildings {
+    double* batchEvaluate(Board* board, int w, int h, int k);
+    double evaluate(Board board, int w, int h);
+    enum class Units {
         Empty,
         Prod,
         Box,
         Knight,
         Arrow,
-        BuildingCount,
+        UnitCount,
     };
-    int getBuildingCount() { return (int)Buildings::BuildingCount; };
-    std::string buildingToString(int building);
+    enum class Rotations {
+        Up,
+        Down,
+        Left,
+        Right,
+        RotationCount,
+    };
+    int getUnitCount() { return (int)Units::UnitCount; };
+    std::string unitToString(int unit, int rot);
 };
 
 #endif //__VANILLA_EVALUATOR_H__
