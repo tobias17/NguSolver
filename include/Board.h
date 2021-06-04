@@ -2,8 +2,10 @@
 #define __BOARD_H__
 
 struct Board {
-    int* units;
-    int* rots;
+    int* units = nullptr;
+    int* rots = nullptr;
 };
+
+Board copyBoard(Board orig, int length);
 
 #endif //__BOARD_H__

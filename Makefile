@@ -5,7 +5,7 @@ BIN         := bin
 SRC         := src
 INCLUDE     := include
 
-LIBRARIES   :=
+LIBRARIES   := -lpthread
 EXECUTABLE  := main
 
 all: $(BIN)/$(EXECUTABLE)
